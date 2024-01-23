@@ -2,18 +2,18 @@ import './App.css';
 import React from 'react';
 
 class App extends React.Component {
-  number!: NodeJS.Timeout;
+  timerID!: NodeJS.Timeout;
 
   state = {
     currentDateTime: new Date().toISOString(),
   };
 
   componentDidMount() {
-    this.number = setInterval(() => this.tick(), 1000);
+    this.timerID = setInterval(() => this.tick(), 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.number);
+    clearInterval(this.timerID);
   }
 
   tick() {
