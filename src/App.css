@@ -4,3 +4,41 @@
   padding: 2rem;
   text-align: center;
 }
+
+.date {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.time {
+  font-variant-numeric: tabular-nums;
+  font-weight: bold;
+  font-size: 15rem;
+  margin-bottom: 1rem;
+}
+
+.minute {
+  color: silver
+}
+
+.second {
+  color: gray
+}
+
+.colonhm {
+  color: gray;
+}
+
+.colonms {
+  color: dimgray
+}
+
+.colon {
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
