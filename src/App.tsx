@@ -1,37 +1,25 @@
 import './App.css';
-import React from 'react';
+import { useState, useEffect } from 'react';
 
-class App extends React.Component {
-  timerID!: NodeJS.Timeout;
+const App = () => {
+  const [currentDateTime, setCurrentDateTime] = useState(new Date().toISOString());
 
-  state = {
-    currentDateTime: new Date().toISOString(),
-  };
+  useEffect(() => {
+    const timerID = setInterval(() => {
+      setCurrentDateTime(new Date().toISOString());
+    }, 1000);
 
-  componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
-  }
+    return () => clearInterval(timerID);
+  }, []);
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      currentDateTime: new Date().toISOString(),
-    });
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1>⏰</h1>
-          <p>Current date and time (ISO format) is: {this.state.currentDateTime}</p>
-        </header>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>⏰</h1>
+        <p>Current date and time (ISO format) is: {currentDateTime}</p>
+      </header>
+    </div>
+  );
+};
 
 export default App;
