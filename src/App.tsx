@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const App = () => {
   const [date, setDate] = useState<string>();
@@ -7,17 +7,19 @@ const App = () => {
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
 
-  useEffect(() => {
-    const timerID = setInterval(() => {
-      const now = new Date();
-      setDate(now.toDateString());
-      setHour(now.getHours());
-      setMinute(now.getMinutes());
-      setSecond(now.getSeconds());
-    }, 1000);
-
-    return () => clearInterval(timerID);
+  const tick = useCallback(() => {
+    const now = new Date();
+    setDate(now.toDateString());
+    setHour(now.getHours());
+    setMinute(now.getMinutes());
+    setSecond(now.getSeconds());
   }, []);
+
+  useEffect(() => {
+    tick();
+    const timerID = setInterval(tick, 1000);
+    return () => clearInterval(timerID);
+  }, [tick]);
 
   return (
     <div className="App">
